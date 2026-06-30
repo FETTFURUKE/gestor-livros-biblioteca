@@ -38,7 +38,7 @@ return 0;
     void listarUsuario(int codigo[], char nome[][50], char telefone[][50], char email[], int total){
 
         if (total == 0){
-            printf("--- Nenhum livro cadatrado ---\n");
+            printf("--- Nenhum usuário cadatrado ---\n");
 
             for (int i = 0; i < total; i++){
                 printf("Código: %d\n", codigo[i]);
