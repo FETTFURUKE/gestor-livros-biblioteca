@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 // Prototipo das Funções Livro
 void listarLivro(int codigo[], char titulo[][50], char autor[][50], int categoria[], int ano[], int quantidade[], int quant_disponivel[], int total);
 
