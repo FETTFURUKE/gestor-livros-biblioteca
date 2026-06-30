@@ -40,8 +40,12 @@ void listarLivro(int codigo[], char titulo[][50], char autor[][50], int categori
                 printf("Código: %d\n", codigo[i]);
                 printf("Nome: %s\n", nome[i]);
                 printf("Telefone: %s\n", telefone[i]);
-                printf("Email: %s", email[i]);
+                printf("Email: %c", email[i]);
                 printf("------------------------------");
             }
         }
+}
+
+int main (){
+    return 0;
 }
