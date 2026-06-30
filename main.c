@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include<windows.h>
 
+int quantidade, ano,codigo,quantidadedisponivel;
+char titulo, autor, categoria;
+
+
+
 
 #define MAX_LIVROS 100
 #define MAX_USUARIOS 50
@@ -10,14 +15,27 @@
 void listarUsuario(int codigo[], char nome[][50], char telefone[][50], char email[], int total);
 void listarLivro(int codigo[], char titulo[][50], char autor[][50], int categoria[], int ano[], int quantidade[], int quant_disponivel[], int total);
 
+void menu(){
+    printf("=============================\n");
+    printf("--- Gerenciador de Biblioteca ---\n");
+    printf("1 - Gerenciar Livros\n");
+    prinft("2 - Gerenciar Usuários\n");
+    printf("3 - Empréstimos\n");
+    printf("4 - Relatórios\n");
+    printf("0 - Sair\n");
+    printf("Escolha uma opção: ")
+}
+
 int main (){
     SetConsoleOutputCP(CP_UTF8);
 
-    int i, j, 
+    menu();
+
+    int opcao;
 
     do
     {
-        /* code */
+        
     } while (opcao != 0);
     
 
