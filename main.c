@@ -4,7 +4,11 @@
 void listarUsuario(int codigo[], char nome[][50], char telefone[][50], char email[], int total);
 void listarLivro(int codigo[], char titulo[][50], char autor[][50], int categoria[], int ano[], int quantidade[], int quant_disponivel[], int total);
 
+int main (){
 
+return 0;
+
+}
 
     // Função Listar Livro
     void listarLivro(int codigo[], char titulo[][50], char autor[][50], int categoria[], int ano[], int quantidade[], int quant_disponivel[], int total)
@@ -44,8 +48,4 @@ void listarLivro(int codigo[], char titulo[][50], char autor[][50], int categori
                 printf("------------------------------");
             }
         }
-}
-
-int main (){
-    return 0;
 }
