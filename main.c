@@ -2,23 +2,67 @@
 #include<windows.h>
 
 
+
+
+
+
 #define MAX_LIVROS 100
 #define MAX_USUARIOS 50
 #define MAX_EMPRESTIMOS 200
+
+int quantidade, ano,codigo,quantidadedisponivel;
+char titulo, autor, categoria;
+
+typedef struct{
+
+int quantidade, ano,codigo,quantidadedisponivel;
+char titulo, autor, categoria;
+
+
+}livros[MAX_LIVROS];
+
+
+
+void cadastroLivro(){
+printf(" digite o codigo do livro: ");
+scanf("%d", &codigo);
+printf("Digite o titulo do livro: ");
+scanf("%s", titulo);
+printf("Digite o nome do autor: ");
+scanf("%s", autor);
+printf("Digite a categoria do livro: ");
+scanf("%s", categoria);
+printf("Digite o ano do livro: ");
+scanf("%d", &ano);
+printf("Digite a quantidade de livros: ");
+scanf("%d", &quantidade);
+
+printf("%d", codigo );
+printf("%s", titulo );
+printf("%s", autor);
+}
+
 
 // Prototipo das Funções Listar
 void listarUsuario(int codigo[], char nome[][50], char telefone[][50], char email[], int total);
 void listarLivro(int codigo[], char titulo[][50], char autor[][50], int categoria[], int ano[], int quantidade[], int quant_disponivel[], int total);
 
+void menu(){
+    printf("=============================\n");
+    printf("--- Gerenciador de Biblioteca ---\n");
+    printf("1 - Gerenciar Livros\n");
+    printf("2 - Gerenciar Usuários\n");
+    printf("3 - Empréstimos\n");
+    printf("4 - Relatórios\n");
+    printf("0 - Sair\n");
+    printf("Escolha uma opção: ");
+}
+
 int main (){
     SetConsoleOutputCP(CP_UTF8);
+   cadastroLivro();
+  
 
-    int i, j, 
-
-    do
-    {
-        /* code */
-    } while (opcao != 0);
     
 
 return 0;
@@ -30,7 +74,7 @@ return 0;
 
         if (total == 0){
             printf("--- Nenhum livro cadastrado! ---\n");
-            return 0;
+       
         }
 
     printf("--- Lista de livros cadastrados ---");
@@ -52,7 +96,7 @@ return 0;
 
         if (total == 0){
             printf("--- Nenhum usuário cadatrado ---\n");
-            return 0;
+      
 
         }
 
@@ -66,3 +110,4 @@ return 0;
             printf("------------------------------");
         }
 }
+
