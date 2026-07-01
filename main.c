@@ -171,7 +171,6 @@ void menu_livro(){
             pausar();
         }
     }
-
     return 0;
 }
 
