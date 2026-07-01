@@ -132,7 +132,8 @@ void menu_livro(){
     printf("0 - Voltar\n");
     printf("Escolha uma opção: ");
 
-    int opcao;
+    int opcao, codigo, ano, quantidade, quant_disponivel;
+    char titulo, autor, categoria
 
         bool sistemaAtivo = true;
 
@@ -147,7 +148,7 @@ void menu_livro(){
             break;
 
         case 2:
-            listarLivro();
+            listarLivro(codigo, titulo, autor, categoria, ano, quantidade, quant_disponivel);
             break;
 
         case 3:
@@ -200,7 +201,7 @@ void menu_usuario(){
             break;
 
         case 2:
-            listarUsuario();
+            listarUsuario(codigo, nome, telefone, email);
             break;
 
         case 3:
