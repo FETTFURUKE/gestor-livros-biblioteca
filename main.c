@@ -7,7 +7,6 @@
 #define MAX_LIVROS 100
 #define MAX_USUARIOS 50
 
-// 1. Estruturas de Dados (Structs)
 typedef struct {
     int codigo;
     char titulo[50];
