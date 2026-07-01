@@ -189,6 +189,7 @@ void menu_usuario(){
         int opcao;
 
         bool sistemaAtivo = true;
+        
 
     while (sistemaAtivo)
     {
