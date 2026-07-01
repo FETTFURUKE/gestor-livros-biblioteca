@@ -8,10 +8,13 @@
 #define MAX_EMPRESTIMOS 200
 
 // Prototipo das Funções Listar
-void listarUsuario(int codigo[], char nome[][50], char telefone[][50], char email[], int total);
+void menu_usuario();
+void menu_livro();
+void listarUsuario(int codigo[], char nome[][50], char telefone[][9], char email[20], int total);
 void excluirLivro(int codigo[], char titulo[][50], char autor[][50], int categoria[], int ano[], int quantidade[], int quant_disponivel[], int total);
 void listarLivro(int codigo[], char titulo[][50], char autor[][50], int categoria[], int ano[], int quantidade[], int quant_disponivel[], int total);
-void excluirUsuario(int codigo[], char nome[][50], char telefone[][50], char email[], int total);
+void excluirUsuario(int codigo[], char nome[][50], char telefone[][9], char email[20], int total);
+
 
 void pausar()
 {
@@ -22,41 +25,17 @@ void menu_principal(){
     printf("=============================\n");
     printf("--- Gerenciador de Biblioteca ---\n");
     printf("1 - Gerenciar Livros\n");
-    prinft("2 - Gerenciar Usuários\n");
+    printf("2 - Gerenciar Usuários\n");
     printf("3 - Empréstimos\n");
     printf("4 - Relatórios\n");
     printf("0 - Sair\n");
     printf("Escolha uma opção: ");
 }
 
-void menu_livro(){
-    printf("=============================\n");
-    printf("--- Gerenciamento de Livros ---\n");
-    printf("1 - Cadastrar\n");
-    prinft("2 - Listar\n");
-    printf("3 - Bruscar\n");
-    printf("4 - Alterar\n");
-    printf("5 - Excluir\n");
-    printf("0 - Voltar\n");
-    printf("Escolha uma opção: ");
-}
-
-void menu_usuario(){
-    printf("=============================\n");
-    printf("--- Gerenciamento de Usuarios ---\n");
-    printf("1 - Cadastrar\n");
-    prinft("2 - Listar\n");
-    printf("3 - Bruscar\n");
-    printf("4 - Alterar\n");
-    printf("5 - Excluir\n");
-    printf("0 - Voltar\n");
-    printf("Escolha uma opção: ");
-}
-
 int main (){
     SetConsoleOutputCP(CP_UTF8);
 
-    int total = 0;
+    
     int opcao;
 
     bool sistemaAtivo = true;
@@ -99,7 +78,6 @@ int main (){
             pausar();
         }
     }
-
     return 0;
 }
 
@@ -108,8 +86,7 @@ int main (){
 
         if (total == 0){
             printf("--- Nenhum livro cadastrado! ---\n");
-            return 0;
-        }
+         }
 
     printf("--- Lista de livros cadastrados ---");
         
@@ -126,13 +103,11 @@ int main (){
 }
 
     // Função Listar Usuario
-    void listarUsuario(int codigo[], char nome[][50], char telefone[][50], char email[], int total){
+    void listarUsuario(int codigo[], char nome[][50], char telefone[][9], char email[20], int total){
 
         if (total == 0){
             printf("--- Nenhum usuário cadatrado ---\n");
-            return 0;
-
-        }
+        
 
     printf("--- Lista de usuários cadastrados ---");
 
@@ -143,57 +118,112 @@ int main (){
             printf("Email: %c", email[i]);
             printf("------------------------------");
         }
+    }
 }
 
-    // Função excluir livro
-    int excluirLivro(int codigo[], char titulo[][50], char autor[][50], int categoria[], int ano[], int quantidade[], int quant_disponivel[], int total){
-    char nomeBusca[50];
-    int encontrado = 0;
+void menu_livro(){
+    printf("=============================\n");
+    printf("--- Gerenciamento de Livros ---\n");
+    printf("1 - Cadastrar\n");
+    printf("2 - Listar\n");
+    printf("3 - Bruscar\n");
+    printf("4 - Alterar\n");
+    printf("5 - Excluir\n");
+    printf("0 - Voltar\n");
+    printf("Escolha uma opção: ");
 
-    getchar();
+    int opcao;
 
-    printf("\nDigite o nome do Livro para remover: ");
-    fgets(nomeBusca, 50, stdin);
+        bool sistemaAtivo = true;
 
-    nomeBusca[strcspn(nomeBusca, "\n")] = '\0';
-
-    converterMaiusculo(nomeBusca);
-
-    for (int i = 0; i < total; i++)
+    while (sistemaAtivo)
     {
-        if (strcmp(titulo[i], nomeBusca) == 0)
+        scanf(" %d", &opcao);
+
+        switch (opcao)
         {
-            // Move os produtos seguintes para preencher a lacuna
-            for (int j = i; j < total - 1; j++)
-            {
-                strcpy(codigo[j], codigo[j + 1]);
-                titulo[j] = titulo[j + 1];
-                autor[j] = autor[j + 1];
-                categoria[j] = categoria [j + 1];
-                ano[j] = ano [j + 1];
-                quantidade[j] = quantidade [j + 1];
-                quant_disponivel[j] = quant_disponivel [j + 1];
-            }
+        case 1:
+            
+            break;
 
-            // Limpa o último produto
-            codigo[total - 1][0] = '\0';
-            titulo[total - 1] = 0;
-            autor[total - 1] = 0;
-            categoria[total - 1] = 0;
-            ano[total - 1] = 0;
-            quantidade[total - 1] = 0;
-            quant_disponivel[total - 1] = 0;
+        case 2:
+            listarLivro();
+            break;
 
-            printf("\n ===== PRODUTO REMOVIDO COM SUCESSO! ===== \n");
-            return total - 1; // Decrementa o total de produtos
+        case 3:
+        
+            break;
+
+        case 4:
+        
+            break;
+
+        case 0:
+            menu_principal();
+            break;
+
+        default:
+            printf("\nOpção inválida!\n");
+        }
+
+        if (sistemaAtivo)
+        {
+            pausar();
         }
     }
 
-    if (!encontrado)
-    {
-        printf("\n ===== PRODUTO NÃO ENCONTRADO! ===== \n");
-        return total;
-    }
+    return 0;
+}
 
-    return total;
+void menu_usuario(){
+    printf("=============================\n");
+    printf("--- Gerenciamento de Usuarios ---\n");
+    printf("1 - Cadastrar\n");
+    printf("2 - Listar\n");
+    printf("3 - Bruscar\n");
+    printf("4 - Alterar\n");
+    printf("5 - Excluir\n");
+    printf("0 - Voltar\n");
+    printf("Escolha uma opção: ");
+
+        int opcao;
+
+        bool sistemaAtivo = true;
+
+    while (sistemaAtivo)
+    {
+        scanf(" %d", &opcao);
+
+        switch (opcao)
+        {
+        case 1:
+            
+            break;
+
+        case 2:
+            listarUsuario();
+            break;
+
+        case 3:
+        
+            break;
+
+        case 4:
+        
+            break;
+
+        case 0:
+            menu_principal();
+            break;
+
+        default:
+            printf("\nOpção inválida!\n");
+        }
+
+        if (sistemaAtivo)
+        {
+            pausar();
+        }
+    }
+    return 0;
 }
