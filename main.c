@@ -33,9 +33,15 @@ int total_usuarios = 0;
 // 3. Protótipos de Funções
 void menu_livro();
 void menu_usuario();
+void cadastrarLivro();
 void listarLivro();
+void buscarLivro();
+void alterarLivro();
 void excluirLivro();
+void cadastrarUsuario();
 void listarUsuario();
+void buscarUsuario();
+void alterarUsuario();
 void excluirUsuario();
 
 void pausar() {
@@ -54,7 +60,7 @@ void menu_principal() {
 }
 
 int main() {
-    
+
     SetConsoleOutputCP(CP_UTF8);
     
     int opcao;
