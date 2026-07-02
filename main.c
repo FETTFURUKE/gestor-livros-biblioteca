@@ -166,7 +166,7 @@ void menu_usuario() {
 
         switch (opcao) {
             case 1:
-                printf("cadastro\n");
+                cadastrarUsuario();
                 break;
             case 2:
                 listarUsuario();
@@ -201,7 +201,7 @@ void cadastrarLivro(){
     acervo[i].codigo = i + 1;
 
     getchar();
-
+    printf("\n--- CADASTRO DE LIVROS ---\n");
     printf("\nTítulo do Livro: ");
     fgets(acervo[i].titulo, 50, stdin);
     limparEnter(acervo[i].titulo);
@@ -285,9 +285,30 @@ void excluirLivro() {
 
 // Funções para Usuarios
 void cadastrarUsuario(){
+    if ( total_usuarios>= MAX_USUARIOS){
+        printf("\nLimite de cadastro de usuários atingido!\n");
+        return;
+    }
 
+    int i = total_usuarios;
 
+    acervo[i].codigo = i + 1;
+
+    getchar();
+    printf("\n--- CADASTRO DE USUÁRIO ---\n");
+    printf("\nNome do usuário: ");
+    fgets(usuarios[i].nome, 100, stdin);
+    limparEnter(usuarios[i].nome);
+
+    printf("\nTelefone: ");
+    fgets(usuarios[i].telefone, 10, stdin);
+    limparEnter(usuarios[i].telefone);
+
+    printf("\nEmail: ");
+    fgets(usuarios[i].email, 20, stdin);
+    limparEnter(usuarios[i].email);
 }
+
 void listarUsuario() {
     if (total_usuarios == 0) {
         printf("\n--- Nenhum usuário cadastrado! ---\n");
