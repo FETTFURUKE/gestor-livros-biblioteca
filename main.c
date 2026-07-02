@@ -36,6 +36,8 @@ void listarLivro();
 void excluirLivro();
 void listarUsuario();
 void excluirUsuario();
+void cadastrarLivro();
+void cadastrarUsuario();
 
 void pausar() {
     system("pause");
@@ -59,7 +61,7 @@ int main() {
     int opcao;
     bool sistemaAtivo = true;
 
-while (sistemaAtivo) {
+    while (sistemaAtivo) {
         menu_principal();
         scanf("%d", &opcao);
 
@@ -109,7 +111,7 @@ void menu_livro() {
 
         switch (opcao) {
             case 1:
-                printf("cadastro\n");
+                cadastrarLivro();
                 break;
             case 2:
                 listarLivro();
@@ -151,7 +153,7 @@ void menu_usuario() {
 
         switch (opcao) {
             case 1:
-                printf("cadastro\n");
+                cadastrarUsuario();
                 break;
             case 2:
                 listarUsuario();
@@ -175,7 +177,6 @@ void menu_usuario() {
 }
 
 void listarLivro() {
-    
    if (total_livros == 0) {
         printf("\n--- Nenhum livro cadastrado! ---\n");
         return;
@@ -207,7 +208,6 @@ void excluirLivro() {
     for (int i = 0; i < total_livros; i++) {
         if (acervo[i].codigo == codigoExcluir) {
             encontrado = true;
-            // Desloca os livros seguintes para preencher o espaço
             for (int j = i; j < total_livros - 1; j++) {
                 acervo[j] = acervo[j + 1];
             }
@@ -264,4 +264,62 @@ void excluirUsuario() {
     if (!encontrado) {
         printf("Usuário não encontrado!\n");
     }
+}
+
+void cadastrarLivro() {
+    if (total_livros >= MAX_LIVROS) {
+        printf("\nerro: limite de livros atingido\n");
+        return;
+    }
+
+    printf("\n--- cadastro de livro ---\n");
+
+    printf("codigo: ");
+    scanf("%d", &acervo[total_livros].codigo);
+    
+    printf("titulo: ");
+    scanf(" %[^\n]", acervo[total_livros].titulo); 
+
+    printf("autor: ");
+    scanf(" %[^\n]", acervo[total_livros].autor);
+    
+    printf("codigo da categoria: ");
+    scanf("%d", &acervo[total_livros].categoria);
+
+    printf("ano: ");
+    scanf("%d", &acervo[total_livros].ano);
+
+    printf("quantidade: ");
+    scanf("%d", &acervo[total_livros].quantidade);
+    
+    acervo[total_livros].quant_disponivel = acervo[total_livros].quantidade;
+
+    total_livros++;
+
+    printf("\nlivro salvo com sucesso\n");
+}
+
+void cadastrarUsuario() {
+    if (total_usuarios >= MAX_USUARIOS) {
+        printf("\nerro: limite de usuarios atingido\n");
+        return;
+    }
+
+    printf("\n--- cadastro de usuario ---\n");
+
+    printf("codigo do usuario: ");
+    scanf("%d", &usuarios[total_usuarios].codigo);
+
+    printf("nome: ");
+    scanf(" %[^\n]", usuarios[total_usuarios].nome);
+
+    printf("telefone: ");
+    scanf(" %[^\n]", usuarios[total_usuarios].telefone);
+    
+    printf("email: ");
+    scanf(" %[^\n]", usuarios[total_usuarios].email);
+
+    total_usuarios++;
+
+    printf("\nusuario salvo com sucesso\n");
 }
