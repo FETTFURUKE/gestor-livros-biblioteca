@@ -13,14 +13,14 @@ typedef struct {
     char autor[50];
     char categoria[20];
     int ano;
-    int quantidade;
+    int quant;
     int quant_disponivel;
 } livro;
 
 typedef struct {
     int codigo;
     char nome[50];
-    char telefone[15];
+    char telefone[10];
     char email[50];
 } usuario;
 
@@ -191,7 +191,7 @@ void menu_usuario() {
 
 // Funções para Livros
 void cadastrarLivro(){
-    if ( total_livros>= MAX_LIVROS){
+    if (total_livros>= MAX_LIVROS){
         printf("\nLimite de cadastro de livros atingido!\n");
         return;
     }
@@ -202,6 +202,7 @@ void cadastrarLivro(){
 
     getchar();
     printf("\n--- CADASTRO DE LIVROS ---\n");
+        
     printf("\nTítulo do Livro: ");
     fgets(acervo[i].titulo, 50, stdin);
     limparEnter(acervo[i].titulo);
@@ -218,9 +219,9 @@ void cadastrarLivro(){
     scanf("%d", &acervo[i].ano);
 
     printf("\nQuantidade total adquirida: ");
-    scanf("%d", &acervo[i].quantidade);
+    scanf("%d", &acervo[i].quant);
 
-    acervo[i].quant_disponivel += acervo[i].quantidade;
+    acervo[i].quant_disponivel += acervo[i].quant;
 }
 
 void listarLivro() {
@@ -238,7 +239,7 @@ void listarLivro() {
         printf("Autor: %s\n", acervo[i].autor);
         printf("Categoria: %s\n", acervo[i].categoria);
         printf("Ano: %d\n", acervo[i].ano);
-        printf("Qtd Total: %d | Qtd Disponível: %d\n", acervo[i].quantidade, acervo[i].quant_disponivel);
+        printf("Qtd Total: %d | Qtd Disponível: %d\n", acervo[i].quant, acervo[i].quant_disponivel);
         printf("------------------------------\n");
     }
 }
@@ -297,7 +298,7 @@ void cadastrarUsuario(){
     getchar();
     printf("\n--- CADASTRO DE USUÁRIO ---\n");
     printf("\nNome do usuário: ");
-    fgets(usuarios[i].nome, 100, stdin);
+    fgets(usuarios[i].nome, 50, stdin);
     limparEnter(usuarios[i].nome);
 
     printf("\nTelefone: ");
@@ -305,7 +306,7 @@ void cadastrarUsuario(){
     limparEnter(usuarios[i].telefone);
 
     printf("\nEmail: ");
-    fgets(usuarios[i].email, 20, stdin);
+    fgets(usuarios[i].email, 50, stdin);
     limparEnter(usuarios[i].email);
 }
 
