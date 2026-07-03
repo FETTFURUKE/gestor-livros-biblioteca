@@ -191,6 +191,7 @@ void menu_usuario() {
 
 // Funções para Livros
 void cadastrarLivro(){
+    
     if (total_livros>= MAX_LIVROS){
         printf("\nLimite de cadastro de livros atingido!\n");
         return;
@@ -222,6 +223,8 @@ void cadastrarLivro(){
     scanf("%d", &acervo[i].quant);
 
     acervo[i].quant_disponivel += acervo[i].quant;
+
+    (total_livros)++;
 }
 
 void listarLivro() {
@@ -293,7 +296,7 @@ void cadastrarUsuario(){
 
     int i = total_usuarios;
 
-    acervo[i].codigo = i + 1;
+    usuarios[i].codigo = i + 1;
 
     getchar();
     printf("\n--- CADASTRO DE USUÁRIO ---\n");
@@ -308,6 +311,8 @@ void cadastrarUsuario(){
     printf("\nEmail: ");
     fgets(usuarios[i].email, 50, stdin);
     limparEnter(usuarios[i].email);
+
+    (total_usuarios)++;
 }
 
 void listarUsuario() {
