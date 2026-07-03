@@ -11,16 +11,16 @@ typedef struct {
     int codigo;
     char titulo[50];
     char autor[50];
-    int categoria;
+    char categoria[20];
     int ano;
-    int quantidade;
+    int quant;
     int quant_disponivel;
 } livro;
 
 typedef struct {
     int codigo;
     char nome[50];
-    char telefone[15];
+    char telefone[10];
     char email[50];
 } usuario;
 
@@ -29,15 +29,28 @@ int total_livros = 0;
 usuario usuarios[MAX_USUARIOS];
 int total_usuarios = 0;
 
-// 3. Protótipos de Funções
+
 void menu_livro();
 void menu_usuario();
-void listarLivro();
-void excluirLivro();
-void listarUsuario();
-void excluirUsuario();
+void limparEnter(char texto[]){
+
+    texto[strcspn(texto, "\n")] = '\0';
+
+}
+
+// Protótipos de Funções Livros
 void cadastrarLivro();
+void listarLivro();
+void buscarLivro();
+void alterarLivro();
+void excluirLivro();
+
+// Prototipos de Funções Usuario
 void cadastrarUsuario();
+void listarUsuario();
+void buscarUsuario();
+void alterarUsuario();
+void excluirUsuario();
 
 void pausar() {
     system("pause");
@@ -61,7 +74,7 @@ int main() {
     int opcao;
     bool sistemaAtivo = true;
 
-    while (sistemaAtivo) {
+while (sistemaAtivo) {
         menu_principal();
         scanf("%d", &opcao);
 
@@ -176,22 +189,73 @@ void menu_usuario() {
     }
 }
 
+// Funções para Livros
+void cadastrarLivro(){
+    
+    if (total_livros>= MAX_LIVROS){
+        printf("\nLimite de cadastro de livros atingido!\n");
+        return;
+    }
+
+    int i = total_livros;
+
+    acervo[i].codigo = i + 1;
+
+    getchar();
+    printf("\n--- CADASTRO DE LIVROS ---\n");
+        
+    printf("\nTítulo do Livro: ");
+    fgets(acervo[i].titulo, 50, stdin);
+    limparEnter(acervo[i].titulo);
+
+    printf("\nAutor do Livro: ");
+    fgets(acervo[i].autor, 50, stdin);
+    limparEnter(acervo[i].autor);
+
+    printf("\nCategoria: ");
+    fgets(acervo[i].categoria, 20, stdin);
+    limparEnter(acervo[i].categoria);
+
+    printf("\nAno de Publicação: ");
+    scanf("%d", &acervo[i].ano);
+
+    printf("\nQuantidade total adquirida: ");
+    scanf("%d", &acervo[i].quant);
+
+    acervo[i].quant_disponivel += acervo[i].quant;
+
+    (total_livros)++;
+}
+
 void listarLivro() {
+    
    if (total_livros == 0) {
         printf("\n--- Nenhum livro cadastrado! ---\n");
         return;
     }
 
     printf("\n--- Lista de livros cadastrados ---\n");
+
     for (int i = 0; i < total_livros; i++) {
         printf("Código: %d\n", acervo[i].codigo);
         printf("Título: %s\n", acervo[i].titulo);
         printf("Autor: %s\n", acervo[i].autor);
-        printf("Categoria: %d\n", acervo[i].categoria);
+        printf("Categoria: %s\n", acervo[i].categoria);
         printf("Ano: %d\n", acervo[i].ano);
-        printf("Qtd Total: %d | Qtd Disponível: %d\n", acervo[i].quantidade, acervo[i].quant_disponivel);
+        printf("Qtd Total: %d | Qtd Disponível: %d\n", acervo[i].quant, acervo[i].quant_disponivel);
         printf("------------------------------\n");
     }
+}
+
+void buscarLivro(){
+
+
+}
+
+
+void alterarLivro(){
+
+
 }
 
 void excluirLivro() {
@@ -208,6 +272,7 @@ void excluirLivro() {
     for (int i = 0; i < total_livros; i++) {
         if (acervo[i].codigo == codigoExcluir) {
             encontrado = true;
+            // Desloca os livros seguintes para preencher o espaço
             for (int j = i; j < total_livros - 1; j++) {
                 acervo[j] = acervo[j + 1];
             }
@@ -220,6 +285,34 @@ void excluirLivro() {
     if (!encontrado) {
         printf("Livro não encontrado!\n");
     }
+}
+
+// Funções para Usuarios
+void cadastrarUsuario(){
+    if ( total_usuarios>= MAX_USUARIOS){
+        printf("\nLimite de cadastro de usuários atingido!\n");
+        return;
+    }
+
+    int i = total_usuarios;
+
+    usuarios[i].codigo = i + 1;
+
+    getchar();
+    printf("\n--- CADASTRO DE USUÁRIO ---\n");
+    printf("\nNome do usuário: ");
+    fgets(usuarios[i].nome, 50, stdin);
+    limparEnter(usuarios[i].nome);
+
+    printf("\nTelefone: ");
+    fgets(usuarios[i].telefone, 10, stdin);
+    limparEnter(usuarios[i].telefone);
+
+    printf("\nEmail: ");
+    fgets(usuarios[i].email, 50, stdin);
+    limparEnter(usuarios[i].email);
+
+    (total_usuarios)++;
 }
 
 void listarUsuario() {
@@ -236,6 +329,17 @@ void listarUsuario() {
         printf("Email: %s\n", usuarios[i].email);
         printf("------------------------------\n");
     }
+}
+
+void buscarUsuario(){
+
+
+}
+
+
+void alterarUsuario(){
+
+
 }
 
 void excluirUsuario() {
@@ -264,62 +368,4 @@ void excluirUsuario() {
     if (!encontrado) {
         printf("Usuário não encontrado!\n");
     }
-}
-
-void cadastrarLivro() {
-    if (total_livros >= MAX_LIVROS) {
-        printf("\nerro: limite de livros atingido\n");
-        return;
-    }
-
-    printf("\n--- cadastro de livro ---\n");
-
-    printf("codigo: ");
-    scanf("%d", &acervo[total_livros].codigo);
-    
-    printf("titulo: ");
-    scanf(" %[^\n]", acervo[total_livros].titulo); 
-
-    printf("autor: ");
-    scanf(" %[^\n]", acervo[total_livros].autor);
-    
-    printf("codigo da categoria: ");
-    scanf("%d", &acervo[total_livros].categoria);
-
-    printf("ano: ");
-    scanf("%d", &acervo[total_livros].ano);
-
-    printf("quantidade: ");
-    scanf("%d", &acervo[total_livros].quantidade);
-    
-    acervo[total_livros].quant_disponivel = acervo[total_livros].quantidade;
-
-    total_livros++;
-
-    printf("\nlivro salvo com sucesso\n");
-}
-
-void cadastrarUsuario() {
-    if (total_usuarios >= MAX_USUARIOS) {
-        printf("\nerro: limite de usuarios atingido\n");
-        return;
-    }
-
-    printf("\n--- cadastro de usuario ---\n");
-
-    printf("codigo do usuario: ");
-    scanf("%d", &usuarios[total_usuarios].codigo);
-
-    printf("nome: ");
-    scanf(" %[^\n]", usuarios[total_usuarios].nome);
-
-    printf("telefone: ");
-    scanf(" %[^\n]", usuarios[total_usuarios].telefone);
-    
-    printf("email: ");
-    scanf(" %[^\n]", usuarios[total_usuarios].email);
-
-    total_usuarios++;
-
-    printf("\nusuario salvo com sucesso\n");
 }
