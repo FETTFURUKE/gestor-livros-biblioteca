@@ -32,6 +32,7 @@ int total_usuarios = 0;
 
 void menu_livro();
 void menu_usuario();
+
 void limparEnter(char texto[]){
 
     texto[strcspn(texto, "\n")] = '\0';
@@ -68,7 +69,7 @@ void menu_principal() {
 }
 
 int main() {
-    
+
     SetConsoleOutputCP(CP_UTF8);
     
     int opcao;
@@ -130,10 +131,10 @@ void menu_livro() {
                 listarLivro();
                 break;
             case 3:
-                printf("buscar\n");
+                buscarLivro();
                 break;
             case 4:
-                printf("alterar\n");
+                alterarLivro();
                 break;
             case 5:
                 excluirLivro();
@@ -172,10 +173,10 @@ void menu_usuario() {
                 listarUsuario();
                 break;
             case 3:
-                printf("buscar\n");
+                buscarUsuario();
                 break;
             case 4:
-                printf("alterar\n");
+                alterarUsuario();
                 break;
             case 5:
                 excluirUsuario();
@@ -225,6 +226,7 @@ void cadastrarLivro(){
     acervo[i].quant_disponivel += acervo[i].quant;
 
     (total_livros)++;
+    pausar();
 }
 
 void listarLivro() {
@@ -245,17 +247,79 @@ void listarLivro() {
         printf("Qtd Total: %d | Qtd Disponível: %d\n", acervo[i].quant, acervo[i].quant_disponivel);
         printf("------------------------------\n");
     }
+    pausar();
 }
 
 void buscarLivro(){
+    char tituloBusca[50];
+    int encontrado = 0;
 
+    printf("\nDigite o título do livro que deseja buscar: ");
+    fgets(tituloBusca, 50, stdin);
+    limparEnter(tituloBusca);
 
+    for (int i = 0; i < total_livros; i++) {
+        if (strstr(acervo[i].titulo, tituloBusca) != NULL) {
+            printf("\nLivro encontrado!\n");
+            printf("Código: %d\n", acervo[i].codigo);
+            printf("Título: %s\n", acervo[i].titulo);
+            printf("Autor: %s\n", acervo[i].autor);
+            printf("Categoria: %s\n", acervo[i].categoria);
+            printf("Ano: %d\n", acervo[i].ano);
+            printf("Qtd Total: %d | Qtd Disponível: %d\n", acervo[i].quant, acervo[i].quant_disponivel);
+            encontrado = 1;
+        }
+    }
+
+    if (encontrado == 0) {
+        printf("\nLivro não encontrado!\n");
+    }
+    pausar();
 }
 
 
 void alterarLivro(){
+    int codigoAlterar;
+    printf("\nDigite o código do livro que deseja alterar: ");
+    scanf("%d", &codigoAlterar);
+    bool encontrado = false;
 
+    for (int i = 0; i < total_livros; i++) {
+        if (acervo[i].codigo == codigoAlterar) {
+            encontrado = true;
 
+            getchar();
+            printf("\n--- Alteração de Livro ---\n");
+
+            printf("\nNovo Título do Livro: ");
+            fgets(acervo[i].titulo, 50, stdin);
+            limparEnter(acervo[i].titulo);
+
+            printf("\nNovo Autor do Livro: ");
+            fgets(acervo[i].autor, 50, stdin); 
+            limparEnter(acervo[i].autor);
+
+            printf("\nNova Categoria: ");
+            fgets(acervo[i].categoria, 20, stdin);
+            limparEnter(acervo[i].categoria);
+
+            printf("\nNovo Ano de Publicação: ");
+            scanf("%d", &acervo[i].ano);
+
+            printf("\nNova Quantidade total adquirida: ");
+            scanf("%d", &acervo[i].quant);
+            getchar(); 
+            acervo[i].quant_disponivel = acervo[i].quant;
+
+            printf("Livro alterado com sucesso!\n");
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        printf("Livro não encontrado!\n");
+    }
+    pausar();
 }
 
 void excluirLivro() {
@@ -285,6 +349,7 @@ void excluirLivro() {
     if (!encontrado) {
         printf("Livro não encontrado!\n");
     }
+    pausar();
 }
 
 // Funções para Usuarios
@@ -313,6 +378,7 @@ void cadastrarUsuario(){
     limparEnter(usuarios[i].email);
 
     (total_usuarios)++;
+    pausar();
 }
 
 void listarUsuario() {
@@ -329,17 +395,67 @@ void listarUsuario() {
         printf("Email: %s\n", usuarios[i].email);
         printf("------------------------------\n");
     }
+    pausar();
 }
 
 void buscarUsuario(){
+    char nomeBusca[50];
+    int encontrado = 0;
 
+    printf("\nDigite o nome do usuário que deseja buscar: ");
+    fgets(nomeBusca, 50, stdin);
+    limparEnter(nomeBusca);
 
+    for (int i = 0; i < total_usuarios; i++) {
+        if (strstr(usuarios[i].nome, nomeBusca) != NULL) {
+            printf("\nUsuário encontrado!\n");
+            printf("Código: %d\n", usuarios[i].codigo);
+            printf("Nome: %s\n", usuarios[i].nome);
+            printf("Telefone: %s\n", usuarios[i].telefone);
+            printf("Email: %s\n", usuarios[i].email);
+            encontrado = 1;
+        }
+    }
+    if (encontrado == 0) {
+        printf("\nUsuário não encontrado!\n");
+    }
+    pausar();
 }
 
 
 void alterarUsuario(){
+    int codigoAlterar;
+    printf("\nDigite o código do usuário que deseja alterar: ");
+    scanf("%d", &codigoAlterar);
+    bool encontrado = false;
 
+    for (int i = 0; i < total_usuarios; i++) {
+        if (usuarios[i].codigo == codigoAlterar) {
+            encontrado = true;
 
+            getchar();
+            printf("\n--- Alteração de Usuário ---\n");
+
+            printf("\nNovo Nome do usuário: ");
+            fgets(usuarios[i].nome, 50, stdin);
+            limparEnter(usuarios[i].nome);
+
+            printf("\nNovo Telefone: ");
+            fgets(usuarios[i].telefone, 10, stdin);
+            limparEnter(usuarios[i].telefone);
+
+            printf("\nNovo Email: ");
+            fgets(usuarios[i].email, 50, stdin);
+            limparEnter(usuarios[i].email);
+
+            printf("Usuário alterado com sucesso!\n");
+            break;
+        }
+    }
+    if (!encontrado) {
+        printf("Usuário não encontrado!\n");
+    }
+    pausar();
 }
 
 void excluirUsuario() {
@@ -368,4 +484,5 @@ void excluirUsuario() {
     if (!encontrado) {
         printf("Usuário não encontrado!\n");
     }
+    pausar();
 }
