@@ -6,6 +6,7 @@
 
 #define MAX_LIVROS 100
 #define MAX_USUARIOS 50
+#define MAX_EMPRESTIMOS 200
 
 typedef struct {
     int codigo;
@@ -29,6 +30,8 @@ int total_livros = 0;
 usuario usuarios[MAX_USUARIOS];
 int total_usuarios = 0;
 
+int proximo_codigo_livro = 1;
+int proximo_codigo_usuario = 1;
 
 void menu_livro();
 void menu_usuario();
@@ -192,22 +195,27 @@ void menu_usuario() {
 
 // Funções para Livros
 void cadastrarLivro(){
-    
-    if (total_livros>= MAX_LIVROS){
+    if (total_livros >= MAX_LIVROS){
         printf("\nLimite de cadastro de livros atingido!\n");
         return;
     }
 
     int i = total_livros;
 
-    acervo[i].codigo = i + 1;
+        acervo[i].codigo = proximo_codigo_livro++; 
 
-    getchar();
+    getchar(); // Limpa o buffer do menu
     printf("\n--- CADASTRO DE LIVROS ---\n");
         
-    printf("\nTítulo do Livro: ");
-    fgets(acervo[i].titulo, 50, stdin);
-    limparEnter(acervo[i].titulo);
+        do {
+        printf("\nTítulo do Livro (Obrigatório): ");
+        fgets(acervo[i].titulo, 50, stdin);
+        limparEnter(acervo[i].titulo);
+        
+        if (strlen(acervo[i].titulo) == 0) {
+            printf("Erro: O título não pode ficar em branco!\n");
+        }
+    } while (strlen(acervo[i].titulo) == 0);
 
     printf("\nAutor do Livro: ");
     fgets(acervo[i].autor, 50, stdin);
@@ -220,12 +228,19 @@ void cadastrarLivro(){
     printf("\nAno de Publicação: ");
     scanf("%d", &acervo[i].ano);
 
-    printf("\nQuantidade total adquirida: ");
-    scanf("%d", &acervo[i].quant);
+       do {
+        printf("\nQuantidade total adquirida: ");
+        scanf("%d", &acervo[i].quant);
+        
+        if (acervo[i].quant < 0) {
+            printf("Erro: A quantidade não pode ser negativa!\n");
+        }
+    } while (acervo[i].quant < 0);
 
-    acervo[i].quant_disponivel += acervo[i].quant;
+    acervo[i].quant_disponivel = acervo[i].quant; 
 
-    (total_livros)++;
+    total_livros++;
+    printf("\nLivro cadastrado com sucesso! (Código: %d)\n", acervo[i].codigo);
     pausar();
 }
 
@@ -354,20 +369,27 @@ void excluirLivro() {
 
 // Funções para Usuarios
 void cadastrarUsuario(){
-    if ( total_usuarios>= MAX_USUARIOS){
+    if (total_usuarios >= MAX_USUARIOS){
         printf("\nLimite de cadastro de usuários atingido!\n");
         return;
     }
 
     int i = total_usuarios;
 
-    usuarios[i].codigo = i + 1;
+    usuarios[i].codigo = proximo_codigo_usuario++;
 
     getchar();
     printf("\n--- CADASTRO DE USUÁRIO ---\n");
-    printf("\nNome do usuário: ");
-    fgets(usuarios[i].nome, 50, stdin);
-    limparEnter(usuarios[i].nome);
+    
+    do {
+        printf("\nNome do usuário (Obrigatório): ");
+        fgets(usuarios[i].nome, 50, stdin);
+        limparEnter(usuarios[i].nome);
+        
+        if (strlen(usuarios[i].nome) == 0) {
+            printf("Erro: O nome não pode ficar em branco!\n");
+        }
+    } while (strlen(usuarios[i].nome) == 0);
 
     printf("\nTelefone: ");
     fgets(usuarios[i].telefone, 10, stdin);
@@ -377,7 +399,8 @@ void cadastrarUsuario(){
     fgets(usuarios[i].email, 50, stdin);
     limparEnter(usuarios[i].email);
 
-    (total_usuarios)++;
+    total_usuarios++;
+    printf("\nUsuário cadastrado com sucesso! (Código: %d)\n", usuarios[i].codigo);
     pausar();
 }
 
