@@ -288,6 +288,7 @@ void excluirLivro() {
 }
 
 // Funções para Usuarios
+
 void cadastrarUsuario(){
     if ( total_usuarios>= MAX_USUARIOS){
         printf("\nLimite de cadastro de usuários atingido!\n");
