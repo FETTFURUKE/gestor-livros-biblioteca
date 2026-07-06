@@ -22,7 +22,7 @@ typedef struct {
 typedef struct {
     int codigo;
     char nome[50];
-    char telefone[10];
+    char telefone[20];
     char email[50];
 } usuario;
 
