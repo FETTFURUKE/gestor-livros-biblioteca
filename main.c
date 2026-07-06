@@ -22,7 +22,7 @@ typedef struct {
 typedef struct {
     int codigo;
     char nome[50];
-    char telefone[10];
+    char telefone[20];
     char email[50];
 } usuario;
 
@@ -421,7 +421,7 @@ void cadastrarUsuario(){
     } while (strlen(usuarios[i].nome) == 0);
 
     printf("Telefone: ");
-    fgets(usuarios[i].telefone, 10, stdin);
+    fgets(usuarios[i].telefone, 20, stdin);
     limparEnter(usuarios[i].telefone);
 
     printf("Email: ");
