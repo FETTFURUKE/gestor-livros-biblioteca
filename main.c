@@ -22,7 +22,7 @@ typedef struct {
 typedef struct {
     int codigo;
     char nome[50];
-    char telefone[10];
+    char telefone[30];
     char email[50];
 } usuario;
 
@@ -625,9 +625,10 @@ void relatorioTodosLivros() {
     }
     printf("\n--- RELATÓRIO: TODOS OS LIVROS ---\n");
     for (int i = 0; i < total_livros; i++) {
-        printf("[%d] %s (Autor: %s)\n - Total: %d \n Disponível: %d\n", 
+        printf("    [%d] %s\n    Autor: %s\n    Total: %d\n    Disponível: %d\n", 
             acervo[i].codigo, acervo[i].titulo, acervo[i].autor, acervo[i].quant, acervo[i].quant_disponivel);
     }
+    
     pausar();
 }
 
