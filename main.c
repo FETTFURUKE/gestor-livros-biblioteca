@@ -4,12 +4,14 @@
 #include <stdbool.h>
 #include <windows.h>
 
+
 #define MAX_LIVROS 100
 #define MAX_USUARIOS 50
 #define MAX_EMPRESTIMOS 200
 
 typedef struct {
     int codigo;
+    int barcod;
     char titulo[50];
     char autor[50];
     char categoria[20];
@@ -251,30 +253,46 @@ void cadastrarLivro(){
 
     getchar(); 
     printf("\n--- CADASTRO DE LIVROS ---\n");
+    
+    
+    printf("\nCódigo Barra: ");
+    scanf("%d", &acervo[i].barcod);
+    
+    
+    do {
+        printf("Título do Livro: ");
+        fgets(acervo[i].titulo, 50, stdin);
+        limparEnter(acervo[i].titulo);
         
+
     do {
         printf("\nTítulo do Livro (Obrigatório): ");
         fgets(acervo[i].titulo, 50, stdin);
         limparEnter(acervo[i].titulo);
         
+
         if (strlen(acervo[i].titulo) == 0) {
             printf("Erro: O título não pode ficar em branco!\n");
         }
     } while (strlen(acervo[i].titulo) == 0);
 
-    printf("\nAutor do Livro: ");
+    printf("Autor do Livro: ");
     fgets(acervo[i].autor, 50, stdin);
     limparEnter(acervo[i].autor);
 
-    printf("\nCategoria: ");
+    printf("Categoria: ");
     fgets(acervo[i].categoria, 20, stdin);
     limparEnter(acervo[i].categoria);
 
-    printf("\nAno de Publicação: ");
+    printf("Ano de Publicação: ");
     scanf("%d", &acervo[i].ano);
 
     do {
+
+        printf("Quantidade total adquirida: ");
+
         printf("\nQuantidade total adquirida: ");
+
         scanf("%d", &acervo[i].quant);
         
         if (acervo[i].quant < 0) {
@@ -329,6 +347,11 @@ void alterarLivro(){
             int qtdEmprestadaAtual = acervo[i].quant - acervo[i].quant_disponivel;
 
             printf("\n--- Alteração de Livro (Código %d) ---\n", acervo[i].codigo);
+
+
+
+            printf("\n--- Alteração de Livro (Código %d) ---\n", acervo[i].codigo);
+
 
             printf("Novo Título do Livro: ");
             fgets(acervo[i].titulo, 50, stdin);
@@ -625,7 +648,11 @@ void relatorioTodosLivros() {
     }
     printf("\n--- RELATÓRIO: TODOS OS LIVROS ---\n");
     for (int i = 0; i < total_livros; i++) {
+
+        printf("[%d] %s (Autor: %s) - Total: %d | Disponível: %d\n", 
+
         printf("[%d] %s (Autor: %s)\n - Total: %d \n Disponível: %d\n", 
+
             acervo[i].codigo, acervo[i].titulo, acervo[i].autor, acervo[i].quant, acervo[i].quant_disponivel);
     }
     pausar();
