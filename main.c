@@ -10,6 +10,7 @@
 
 typedef struct {
     int codigo;
+    int barcod;
     char titulo[50];
     char autor[50];
     char categoria[20];
@@ -22,7 +23,7 @@ typedef struct {
 typedef struct {
     int codigo;
     char nome[50];
-    char telefone[10];
+    char telefone[20];
     char email[50];
 } usuario;
 
@@ -251,9 +252,14 @@ void cadastrarLivro(){
 
     getchar(); 
     printf("\n--- CADASTRO DE LIVROS ---\n");
-        
+    
+    
+    printf("\nCódigo Barra: ");
+    scanf("%d", &acervo[i].barcod);
+    
+    
     do {
-        printf("\nTítulo do Livro (Obrigatório): ");
+        printf("Título do Livro: ");
         fgets(acervo[i].titulo, 50, stdin);
         limparEnter(acervo[i].titulo);
         
@@ -262,19 +268,19 @@ void cadastrarLivro(){
         }
     } while (strlen(acervo[i].titulo) == 0);
 
-    printf("\nAutor do Livro: ");
+    printf("Autor do Livro: ");
     fgets(acervo[i].autor, 50, stdin);
     limparEnter(acervo[i].autor);
 
-    printf("\nCategoria: ");
+    printf("Categoria: ");
     fgets(acervo[i].categoria, 20, stdin);
     limparEnter(acervo[i].categoria);
 
-    printf("\nAno de Publicação: ");
+    printf("Ano de Publicação: ");
     scanf("%d", &acervo[i].ano);
 
     do {
-        printf("\nQuantidade total adquirida: ");
+        printf("Quantidade total adquirida: ");
         scanf("%d", &acervo[i].quant);
         
         if (acervo[i].quant < 0) {
