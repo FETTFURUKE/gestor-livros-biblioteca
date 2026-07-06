@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <windows.h>
 
+
 #define MAX_LIVROS 100
 #define MAX_USUARIOS 50
 #define MAX_EMPRESTIMOS 200
