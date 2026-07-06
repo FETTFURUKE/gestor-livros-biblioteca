@@ -474,7 +474,7 @@ void alterarUsuario(){
             limparEnter(usuarios[i].nome);
 
             printf("Novo Telefone: ");
-            fgets(usuarios[i].telefone, 10, stdin);
+            fgets(usuarios[i].telefone, 20, stdin);
             limparEnter(usuarios[i].telefone);
 
             printf("Novo Email: ");
