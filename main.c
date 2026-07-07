@@ -269,13 +269,13 @@ void cadastrarLivro(){
             printf("Erro: Entrada inválida! Digite um número inteiro.\n");
             while (getchar() != '\n'); 
             codigoInvalido = true;
-            continue;
+           // continue;
         }
 
         if (codigoTemp <= 0) {
             printf("Erro: O código deve ser maior que zero!\n");
             codigoInvalido = true;
-            continue;
+           // continue;
         }
 
         for (int j = 0; j < total_livros; j++) {
