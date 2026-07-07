@@ -57,10 +57,12 @@ void menu_livro();
 void menu_usuario();
 void menu_emprestimo();
 void menu_relatorio();
+void menu_escolhaBusca();
 
 void cadastrarLivro();
 void listarLivro();
-void buscarLivro();
+void buscarLivroCodigo();
+void buscarLivroTitulo();
 void alterarLivro();
 void excluirLivro();
 
@@ -153,9 +155,31 @@ void menu_livro() {
         switch (opcao) {
             case 1: cadastrarLivro(); break;
             case 2: listarLivro(); break;
-            case 3: buscarLivro(); break;
+            case 3: menu_escolhaBusca(); break;
             case 4: alterarLivro(); break;
             case 5: excluirLivro(); break;
+            case 0: menuAtivo = false; break;
+            default: printf("\nOpção inválida!\n"); pausar();
+        }
+    }
+}
+
+void menu_escolhaBusca() {
+    int opcao;
+    bool menuAtivo = true;
+
+    while (menuAtivo) {
+        printf("\n=============================\n");
+        printf("1 - Buscar por Título\n");
+        printf("2 - Buscar por Código\n");
+        printf("0 - Voltar\n");
+        printf("Escolha uma opção: ");
+        
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1: buscarLivroTitulo(); break;
+            case 2: buscarLivroCodigo(); break;
             case 0: menuAtivo = false; break;
             default: printf("\nOpção inválida!\n"); pausar();
         }
@@ -269,13 +293,13 @@ void cadastrarLivro(){
             printf("Erro: Entrada inválida! Digite um número inteiro.\n");
             while (getchar() != '\n'); 
             codigoInvalido = true;
-           // continue;
+            
         }
 
         if (codigoTemp <= 0) {
             printf("Erro: O código deve ser maior que zero!\n");
             codigoInvalido = true;
-           // continue;
+            
         }
 
         for (int j = 0; j < total_livros; j++) {
@@ -331,7 +355,7 @@ void listarLivro() {
     relatorioTodosLivros(); 
 }
 
-void buscarLivro(){
+void buscarLivroTitulo(){
     char tituloBusca[50];
     int encontrado = 0;
 
@@ -342,6 +366,28 @@ void buscarLivro(){
 
     for (int i = 0; i < total_livros; i++) {
         if (strstr(acervo[i].titulo, tituloBusca) != NULL) {
+            printf("\nLivro encontrado!\n");
+            printf("Código: %d | Título: %s | Autor: %s\n", acervo[i].codigo, acervo[i].titulo, acervo[i].autor);
+            printf("Qtd Total: %d | Qtd Disponível: %d\n", acervo[i].quant, acervo[i].quant_disponivel);
+            encontrado = 1;
+        }
+    }
+
+    if (encontrado == 0) printf("\nLivro não encontrado!\n");
+    pausar();
+}
+
+void buscarLivroCodigo(){
+    int codigoBusca;
+    int encontrado = 0;
+
+    getchar();
+    printf("\nDigite o código do livro que deseja buscar: ");
+    scanf("%d", &codigoBusca);
+    //limparEnter(codigoBusca);
+
+    for (int i = 0; i < total_livros; i++) {
+        if (acervo[i].codigo == codigoBusca) {
             printf("\nLivro encontrado!\n");
             printf("Código: %d | Título: %s | Autor: %s\n", acervo[i].codigo, acervo[i].titulo, acervo[i].autor);
             printf("Qtd Total: %d | Qtd Disponível: %d\n", acervo[i].quant, acervo[i].quant_disponivel);
