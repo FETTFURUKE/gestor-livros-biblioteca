@@ -8,11 +8,19 @@
 #define MAX_USUARIOS 50
 #define MAX_EMPRESTIMOS 200
 
+//definições de caracteres
+#define TAM_USUARIOS 50
+#define TAM_TELEFONE 20
+#define TAM_EMAIL 50
+#define TAM_TITULO 50
+#define TAM_AUTOR 50
+#define TAM_CATEGORIA 20
+
 typedef struct {
     int codigo;
-    char titulo[50];
-    char autor[50];
-    char categoria[20];
+    char titulo[TAM_TITULO];
+    char autor[TAM_AUTOR];
+    char categoria[TAM_CATEGORIA];
     int ano;
     int quant;
     int quant_disponivel;
@@ -21,6 +29,9 @@ typedef struct {
 
 typedef struct {
     int codigo;
+    char nome[TAM_USUARIOS];
+    char telefone[TAM_TELEFONE];
+    char email[TAM_EMAIL];
     char nome[50];
     char telefone[20];
     char email[50];
@@ -43,8 +54,6 @@ int proximo_codigo_usuario = 1;
 emprestimo emprestimos[MAX_EMPRESTIMOS];
 int total_emprestimos = 0;
 
-void limparEnter(char texto[]);
-void pausar();
 void menu_principal();
 void menu_livro();
 void menu_usuario();
@@ -254,7 +263,7 @@ void cadastrarLivro(){
         
     do {
         printf("\nTítulo do Livro (Obrigatório): ");
-        fgets(acervo[i].titulo, 50, stdin);
+        fgets(acervo[i].titulo, TAM_TITULO, stdin);
         limparEnter(acervo[i].titulo);
         
         if (strlen(acervo[i].titulo) == 0) {
@@ -263,11 +272,11 @@ void cadastrarLivro(){
     } while (strlen(acervo[i].titulo) == 0);
 
     printf("\nAutor do Livro: ");
-    fgets(acervo[i].autor, 50, stdin);
+    fgets(acervo[i].autor, TAM_AUTOR, stdin);
     limparEnter(acervo[i].autor);
 
     printf("\nCategoria: ");
-    fgets(acervo[i].categoria, 20, stdin);
+    fgets(acervo[i].categoria, TAM_CATEGORIA, stdin);
     limparEnter(acervo[i].categoria);
 
     printf("\nAno de Publicação: ");
@@ -331,15 +340,15 @@ void alterarLivro(){
             printf("\n--- Alteração de Livro (Código %d) ---\n", acervo[i].codigo);
 
             printf("Novo Título do Livro: ");
-            fgets(acervo[i].titulo, 50, stdin);
+            fgets(acervo[i].titulo, TAM_TITULO, stdin);
             limparEnter(acervo[i].titulo);
 
             printf("Novo Autor do Livro: ");
-            fgets(acervo[i].autor, 50, stdin); 
+            fgets(acervo[i].autor, TAM_AUTOR, stdin); 
             limparEnter(acervo[i].autor);
 
             printf("Nova Categoria: ");
-            fgets(acervo[i].categoria, 20, stdin);
+            fgets(acervo[i].categoria, TAM_CATEGORIA, stdin);
             limparEnter(acervo[i].categoria);
 
             printf("Novo Ano de Publicação: ");
@@ -413,7 +422,7 @@ void cadastrarUsuario(){
     
     do {
         printf("\nNome do usuário (Obrigatório): ");
-        fgets(usuarios[i].nome, 50, stdin);
+        fgets(usuarios[i].nome, TAM_USUARIOS, stdin);
         limparEnter(usuarios[i].nome);
         if (strlen(usuarios[i].nome) == 0) {
             printf("Erro: O nome não pode ficar em branco!\n");
@@ -421,11 +430,12 @@ void cadastrarUsuario(){
     } while (strlen(usuarios[i].nome) == 0);
 
     printf("Telefone: ");
-    fgets(usuarios[i].telefone, 20, stdin);
+    fgets(usuarios[i].telefone, TAM_TELEFONE, stdin);
+
     limparEnter(usuarios[i].telefone);
 
     printf("Email: ");
-    fgets(usuarios[i].email, 50, stdin);
+    fgets(usuarios[i].email, TAM_EMAIL, stdin);
     limparEnter(usuarios[i].email);
 
     total_usuarios++;
@@ -474,7 +484,7 @@ void alterarUsuario(){
             limparEnter(usuarios[i].nome);
 
             printf("Novo Telefone: ");
-            fgets(usuarios[i].telefone, 10, stdin);
+            fgets(usuarios[i].telefone, 20, stdin);
             limparEnter(usuarios[i].telefone);
 
             printf("Novo Email: ");
