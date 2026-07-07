@@ -32,6 +32,9 @@ typedef struct {
     char nome[TAM_USUARIOS];
     char telefone[TAM_TELEFONE];
     char email[TAM_EMAIL];
+    char nome[50];
+    char telefone[20];
+    char email[50];
 } usuario;
 
 typedef struct {
@@ -428,6 +431,7 @@ void cadastrarUsuario(){
 
     printf("Telefone: ");
     fgets(usuarios[i].telefone, TAM_TELEFONE, stdin);
+
     limparEnter(usuarios[i].telefone);
 
     printf("Email: ");
@@ -631,7 +635,7 @@ void relatorioTodosLivros() {
     }
     printf("\n--- RELATÓRIO: TODOS OS LIVROS ---\n");
     for (int i = 0; i < total_livros; i++) {
-        printf("[%d] %s (Autor: %s) - Total: %d | Disponível: %d\n", 
+        printf("[%d] %s (Autor: %s)\n - Total: %d \n Disponível: %d\n", 
             acervo[i].codigo, acervo[i].titulo, acervo[i].autor, acervo[i].quant, acervo[i].quant_disponivel);
     }
     pausar();
