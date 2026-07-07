@@ -17,6 +17,7 @@
 #define TAM_CATEGORIA 20
 
 typedef struct {
+    int id;
     int codigo;
     char titulo[TAM_TITULO];
     char autor[TAM_AUTOR];
@@ -42,7 +43,7 @@ typedef struct {
 
 livro acervo[MAX_LIVROS];
 int total_livros = 0;
-int proximo_codigo_livro = 1;
+int proximo_id_livro = 1;
 
 usuario usuarios[MAX_USUARIOS];
 int total_usuarios = 0;
@@ -252,11 +253,14 @@ void cadastrarLivro(){
     }
 
     int i = total_livros;
-    acervo[i].codigo = proximo_codigo_livro++; 
+    acervo[i].id = proximo_id_livro++; 
     acervo[i].vezes_emprestado = 0; 
 
     getchar(); 
     printf("\n--- CADASTRO DE LIVROS ---\n");
+
+    printf("Código do Livro: ");
+    scanf("%d", &acervo[i].codigo);
         
     do {
         printf("\nTítulo do Livro (Obrigatório): ");
