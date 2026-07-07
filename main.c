@@ -33,9 +33,6 @@ typedef struct {
     char nome[TAM_USUARIOS];
     char telefone[TAM_TELEFONE];
     char email[TAM_EMAIL];
-    char nome[50];
-    char telefone[20];
-    char email[50];
 } usuario;
 
 typedef struct {
@@ -262,9 +259,37 @@ void cadastrarLivro(){
     getchar(); 
     printf("\n--- CADASTRO DE LIVROS ---\n");
 
-    printf("Código do Livro: ");
-    scanf("%d", &acervo[i].codigo);
-        
+    int codigoTemp;
+    bool codigoInvalido;
+
+    do {
+        codigoInvalido = false;
+        printf("\nCódigo do Livro (Obrigatório): ");
+        if (scanf("%d", &codigoTemp) != 1) {
+            printf("Erro: Entrada inválida! Digite um número inteiro.\n");
+            while (getchar() != '\n'); 
+            codigoInvalido = true;
+            continue;
+        }
+
+        if (codigoTemp <= 0) {
+            printf("Erro: O código deve ser maior que zero!\n");
+            codigoInvalido = true;
+            continue;
+        }
+
+        for (int j = 0; j < total_livros; j++) {
+            if (acervo[j].codigo == codigoTemp) {
+                codigoInvalido = true;
+                printf("Erro: O código já está em uso!\n");
+                break;
+            }
+        }
+    } while (codigoInvalido);
+
+    acervo[i].codigo = codigoTemp;
+
+    getchar();
     do {
         printf("\nTítulo do Livro (Obrigatório): ");
         fgets(acervo[i].titulo, TAM_TITULO, stdin);
