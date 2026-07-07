@@ -80,7 +80,6 @@ void relatorioLivrosDisponiveis();
 void relatorioLivrosEmprestados();
 void relatorioTodosUsuarios();
 void relatorioUsuariosComEmprestimo();
-
 void relatorioEstatisticas();
 
 void limparEnter(char texto[]){
