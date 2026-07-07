@@ -18,9 +18,9 @@
 
 typedef struct {
     int codigo;
-    char titulo[50];
-    char autor[50];
-    char categoria[20];
+    char titulo[TAM_TITULO];
+    char autor[TAM_AUTOR];
+    char categoria[TAM_CATEGORIA];
     int ano;
     int quant;
     int quant_disponivel;
@@ -29,9 +29,9 @@ typedef struct {
 
 typedef struct {
     int codigo;
-    char nome[50];
-    char telefone[20];
-    char email[50];
+    char nome[TAM_USUARIOS];
+    char telefone[TAM_TELEFONE];
+    char email[TAM_EMAIL];
 } usuario;
 
 typedef struct {
